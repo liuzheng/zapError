@@ -13,6 +13,8 @@ const (
 	ErrorCodeOSMkdirAll
 	ErrorCodeOsFindProcess
 	ErrorCodeOsRemove
+	ErrorCodeOSMkdirTemp
+	ErrorCodeOSRemoveAll
 )
 
 func ErrorOSStat(name string, err error) []zap.Field {
@@ -59,5 +61,20 @@ func ErrorOsRemove(filename string, err error) []zap.Field {
 		zap.String("filename", filename),
 		zap.Any("error", err),
 		zap.Uint16("error-code", ErrorCodeOsRemove),
+	}
+}
+func ErrorOSMkdirTemp(dir, pattern string, err error) []zap.Field {
+	return []zap.Field{
+		zap.String("dir", dir),
+		zap.String("pattern", pattern),
+		zap.Any("error", err),
+		zap.Uint16("error-code", ErrorCodeOSMkdirTemp),
+	}
+}
+func ErrorOSRemoveAll(path string, err error) []zap.Field {
+	return []zap.Field{
+		zap.String("path", path),
+		zap.Any("error", err),
+		zap.Uint16("error-code", ErrorCodeOSRemoveAll),
 	}
 }

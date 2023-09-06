@@ -1,4 +1,4 @@
-package log
+package zapError
 
 import (
 	"go.uber.org/zap"
